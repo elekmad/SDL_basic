@@ -1,22 +1,24 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 
 #define SPEED_RATE 1
 
 int main( int argc, char *argv[ ] )
 {
-    SDL_Surface *screen;
+    SDL_Window *window;
     if( SDL_Init( SDL_INIT_VIDEO ) == -1 )
     {
         printf( "Can't init SDL:  %s\n", SDL_GetError( ) );
         return EXIT_FAILURE;
     }
 
-    atexit( SDL_Quit ); 
-    screen = SDL_SetVideoMode( 640, 480, 16, SDL_HWSURFACE );
+    atexit( SDL_Quit );
+    SDL_Surface *surface;
+    window = SDL_CreateWindow("Ma fenêtre de jeu", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, 0 );
+    surface = SDL_GetWindowSurface(window);
 
-    if( screen == NULL )
+    if( surface == NULL )
     {
         printf( "Can't set video mode: %s\n", SDL_GetError( ) );
         return EXIT_FAILURE;
@@ -31,9 +33,9 @@ int main( int argc, char *argv[ ] )
 	    x += xspeed;
 	if(y + yspeed < 480 && y + yspeed >= 0)
 	    y += yspeed;
-        SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0, 0, 0));//Clear the screen
+        SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format, 0, 0, 0));//Clear the screen
         SDL_Rect pos = {x,  y, 10, 10};
-        if(SDL_FillRect(screen, &pos, SDL_MapRGB(screen->format, 255, 255, 255)) == -1)
+        if(SDL_FillRect(surface, &pos, SDL_MapRGB(surface->format, 255, 255, 255)) == -1)
         {
             printf("Can't fill rect : %s\n", SDL_GetError());
             return EXIT_FAILURE;
@@ -77,7 +79,7 @@ int main( int argc, char *argv[ ] )
         }
        
         //Update the display
-        SDL_Flip(screen);
+	SDL_UpdateWindowSurface(window);
         
     }
 
