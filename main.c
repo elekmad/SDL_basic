@@ -56,25 +56,25 @@ int main( int argc, char *argv[ ] )
 			printf("keydown %d\n", event.key.keysym.sym);
 			switch(event.key.keysym.sym)
 			{
-			case SDLK_DOWN:
-			    yspeed = (event.type == SDL_KEYDOWN ? SPEED_RATE : 0);
-			    break;
-			case SDLK_UP:
-			    yspeed = (event.type == SDL_KEYDOWN ? -SPEED_RATE : 0);
-			    break;
-			case SDLK_RIGHT:
-			    xspeed = (event.type == SDL_KEYDOWN ? SPEED_RATE : 0);
-			    break;
-			case SDLK_LEFT:
-			    xspeed = (event.type == SDL_KEYDOWN ? -SPEED_RATE : 0);
-			    break;
-			case SDLK_ESCAPE:
-			    SDL_Quit();
-			    return EXIT_SUCCESS;// Quit the program
-			    break;
+                            case SDLK_DOWN:
+                                yspeed = (event.type == SDL_KEYDOWN ? SPEED_RATE : 0);
+                                break;
+                            case SDLK_UP:
+                                yspeed = (event.type == SDL_KEYDOWN ? -SPEED_RATE : 0);
+                                break;
+                            case SDLK_RIGHT:
+                                xspeed = (event.type == SDL_KEYDOWN ? SPEED_RATE : 0);
+                                break;
+                            case SDLK_LEFT:
+                                xspeed = (event.type == SDL_KEYDOWN ? -SPEED_RATE : 0);
+                                break;
+                            case SDLK_ESCAPE:
+                                SDL_Quit();
+                                return EXIT_SUCCESS;// Quit the program
+                                break;
 			}
 		        printf("xspeed %d yspeed %d \n", xspeed, yspeed);
-
+		        break;
             }
         }
        
