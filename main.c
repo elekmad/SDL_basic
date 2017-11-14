@@ -18,14 +18,14 @@ void one_iter(void)
         x += xspeed;
     if(y + yspeed < 480 && y + yspeed >= 0)
         y += yspeed;
-    SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format, 0, 0, 0));
+    SDL_FillRect(surface, NULL, SDL_MapRGB(surface->format, 0, 0, 0));//Clear the screen
     SDL_Rect pos = {x,  y, 10, 10};
     if(SDL_FillRect(surface, &pos, SDL_MapRGB(surface->format, 255, 255, 255)) == -1)
     {
         printf("Can't fill rect : %s\n", SDL_GetError());
         return;
     }
-    
+    // Check for messages
     if (SDL_PollEvent(&event))
     {
         switch (event.type)
@@ -60,7 +60,7 @@ void one_iter(void)
     	        break;
         }
     }
-    
+    //Update the display
     SDL_UpdateWindowSurface(window);
  
 }
@@ -82,7 +82,7 @@ int main( int argc, char *argv[ ] )
         printf( "Can't set video mode: %s\n", SDL_GetError( ) );
         return EXIT_FAILURE;
     }   
-
+    // Main loop
 #ifdef __EMSCRIPTEN__
     // void emscripten_set_main_loop(em_callback_func func, int fps, int simulate_infinite_loop);
     emscripten_set_main_loop(one_iter, 60, 1);
